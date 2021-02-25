@@ -11,6 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Splash background. -->
+        <item name="android:windowBackground">@drawable/bg_splash_light</item>
+        <item name="activityBackground">@color/white</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
