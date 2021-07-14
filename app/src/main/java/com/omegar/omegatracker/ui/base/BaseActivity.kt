@@ -1,4 +1,4 @@
-package com.omegar.omegatracker.ui.screens.base
+package com.omegar.omegatracker.ui.base
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle

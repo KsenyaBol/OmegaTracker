@@ -1,4 +1,4 @@
-package com.omegar.omegatracker.ui.screens.base
+package com.omegar.omegatracker.ui.base
 
 import com.omega_r.base.mvp.presenters.OmegaPresenter
 
