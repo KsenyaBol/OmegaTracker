@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OmegaTracker</string>
+    <string name="label_hello">Hello from Omega Tracker!</string>
+    <string name="label_email">email</string>
+    <string name="label_password">password</string>
+    <string name="label_login">Login</string>
 </resources>

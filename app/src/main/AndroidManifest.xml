@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OmegaTracker">
-        <activity android:name="com.omegar.omegatracker.ui.main.MainActivity">
+        <activity android:name="com.omegar.omegatracker.ui.main.LoginActivity"
+            android:theme="@style/Theme.OmegaTracker.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
