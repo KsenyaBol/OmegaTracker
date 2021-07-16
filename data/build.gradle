@@ -21,4 +21,11 @@ dependencies {
     implementation Room.room_runtime
     implementation Room.room_ktx
     kapt Room.room_compiler
+
+    //Omega
+    implementation(Omega.base_core) {
+        transitive = false
+    }
+    implementation Omega.base_annotation
+    kapt Omega.base_processor
 }
