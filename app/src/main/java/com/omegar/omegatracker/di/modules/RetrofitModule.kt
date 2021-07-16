@@ -5,7 +5,9 @@ import com.omega_r.base.errors.ErrorHandler
 import com.omega_r.base.remote.CoroutineCallAdapterFactory
 import com.omega_r.base.remote.adapters.TextAdapter
 import com.omegar.data.AppErrorHandler
+import com.omegar.data.api.TrackerApi
 import com.omegar.domain.entity.Issue
+import com.omegar.domain.entity.UserProfile
 import com.omegar.omegatracker.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -48,6 +50,7 @@ class RetrofitModule {
     fun provideMoshi(context: Context): Moshi {
         return Moshi.Builder()
             .add(Issue::class.java, TextAdapter(context).nullSafe())
+            .add(UserProfile::class.java, TextAdapter(context).nullSafe())
             .add(KotlinJsonAdapterFactory())
             .build()
     }
@@ -55,4 +58,8 @@ class RetrofitModule {
     @Provides
     @Singleton
     fun provideErrorHandler(moshi: Moshi): ErrorHandler = AppErrorHandler(moshi)
+
+    @Provides
+    @Singleton
+    fun provideTrackerApi(retrofit: Retrofit): TrackerApi = retrofit.create(TrackerApi::class.java)
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omegar.omegatracker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".application.TrackerApp"
         android:allowBackup="true"
@@ -11,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OmegaTracker">
-        <activity android:name="com.omegar.omegatracker.ui.main.LoginActivity"
+        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
             android:theme="@style/Theme.OmegaTracker.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
