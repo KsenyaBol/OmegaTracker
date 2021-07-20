@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_item_task_ava"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_item_task_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_monitor_circle" />
+
+            <com.omega_r.libs.omegarecyclerview.OmegaRecyclerView
+                android:id="@+id/rv_item_task_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/btn_item_task_start"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_task_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_task_name"
+                tools:listitem="@layout/item_tag" />
+
+            <TextView
+                android:id="@+id/tv_item_task_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/rubik_bold"
+                android:text="@string/name"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_task_ava"
+                app:layout_constraintTop_toTopOf="@+id/iv_item_task_ava" />
+
+            <TextView
+                android:id="@+id/tv_item_task_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/time_zero"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_item_task_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_item_task_name" />
+
+            <ImageButton
+                android:id="@+id/btn_item_task_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_item_task_tag"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_task_time"
+                app:layout_constraintTop_toTopOf="@+id/rv_item_task_tag"
+                app:srcCompat="@drawable/ic_triangle_arrow" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
