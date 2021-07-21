@@ -5,7 +5,7 @@ import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BaseActivity
 
-class HomeActivity : BaseActivity(R.layout.activity_home) {
+class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     companion object {
         fun newInstance() = createActivityLauncher()
