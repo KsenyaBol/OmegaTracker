@@ -3,11 +3,9 @@ package com.omegar.omegatracker.di.modules
 import android.content.Context
 import com.omega_r.base.errors.ErrorHandler
 import com.omega_r.base.remote.CoroutineCallAdapterFactory
-import com.omega_r.base.remote.adapters.TextAdapter
 import com.omegar.data.AppErrorHandler
+import com.omegar.data.SingleToArrayAdapter
 import com.omegar.data.api.TrackerApi
-import com.omegar.domain.entity.Issue
-import com.omegar.domain.entity.UserProfile
 import com.omegar.omegatracker.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -49,8 +47,7 @@ class RetrofitModule {
     @Singleton
     fun provideMoshi(context: Context): Moshi {
         return Moshi.Builder()
-            .add(Issue::class.java, TextAdapter(context).nullSafe())
-            .add(UserProfile::class.java, TextAdapter(context).nullSafe())
+            .add(SingleToArrayAdapter.INSTANCE)
             .add(KotlinJsonAdapterFactory())
             .build()
     }

@@ -28,4 +28,5 @@ dependencies {
     }
     implementation Omega.base_annotation
     kapt Omega.base_processor
+    implementation Omega.types
 }

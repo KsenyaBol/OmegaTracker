@@ -1,6 +1,8 @@
 package com.omegar.domain.entity
 
-interface CustomFieldsValue {
+import java.io.Serializable
+
+interface CustomFieldsValue : Serializable {
     val name: String?
     val presentation: String?
     val minutes: Int?

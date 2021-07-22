@@ -1,8 +1,10 @@
 package com.omegar.domain.entity
 
-interface Issue {
+import java.io.Serializable
+
+interface Issue : Serializable {
     val id: String
-    val resolved: Int?
+    val resolved: Long?
     val summary: String
-    val customFields: CustomFields
+    val customFields: List<CustomFields>?
 }
