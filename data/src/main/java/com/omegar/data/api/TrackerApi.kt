@@ -13,7 +13,7 @@ interface TrackerApi {
         @Query("fields") fields: String
     ): ResponseUserProfile
 
-    @GET("api/issues?query=for:me&fields=id,summary,resolved,customFields(name,value(minutes,name,presentation))")
+    @GET("api/issues?query=for:me%20%23Unresolved&fields=id,summary,resolved,customFields(name,value(minutes,name,presentation))")
     suspend fun getIssues(
         @Header("Authorization") token: String,
         @Query("query") query: String,

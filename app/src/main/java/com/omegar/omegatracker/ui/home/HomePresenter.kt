@@ -1,9 +1,11 @@
 package com.omegar.omegatracker.ui.home
 
-import com.omega_r.libs.omegatypes.toText
 import com.omegar.data.entities.model.Task
 import com.omegar.domain.entity.TaskInterface
 import com.omegar.omegatracker.ui.base.BasePresenter
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class HomePresenter : BasePresenter<HomeView>() {
 
@@ -20,10 +22,29 @@ class HomePresenter : BasePresenter<HomeView>() {
             taskName.clear()
             listIssues.forEach {
                 it.summary
-                taskName.add(Task(it.summary.toText()))
+                taskName.add(
+                    Task(
+                        it.summary,
+                        priority = it.customFields.find {
+                            it.name.contains("Priority")
+                        }?.value?.get(0)?.name,
+                        state = it.customFields.find {
+                            it.name.contains("State")
+                        }?.value?.get(0)?.name,
+                        spentTime = timeFormat(it.customFields.find {
+                            it.name.contains("Spent time")
+                        }?.value?.get(0)?.minutes)
+                    )
+                )
+                viewState.init(taskName)
             }
-            viewState.init(taskName)
         }
+    }
+
+    fun timeFormat(time: Long?): String {
+        return time?.let {
+            SimpleDateFormat("HH:mm:ss", Locale.ROOT).format(Date(TimeUnit.MINUTES.toMillis(it)))
+        } ?: "00:00:00"
     }
 
     fun taskItemClicked(item: TaskInterface) {

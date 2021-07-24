@@ -13,5 +13,5 @@ data class ResponseCustomFieldsValue(
     override val presentation: String?,
 
     @Json(name = "minutes")
-    override val minutes: Int?
+    override val minutes: Long?
 ) : CustomFieldsValue

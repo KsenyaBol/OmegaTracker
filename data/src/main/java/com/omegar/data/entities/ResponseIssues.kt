@@ -16,5 +16,5 @@ data class ResponseIssues(
     override val summary: String,
 
     @Json(name = "customFields")
-    override val customFields: List<ResponseCustomFields>?,
+    override val customFields: List<ResponseCustomFields>,
 ) : Issue

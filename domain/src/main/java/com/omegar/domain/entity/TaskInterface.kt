@@ -1,7 +1,10 @@
 package com.omegar.domain.entity
 
-import com.omega_r.libs.omegatypes.Text
+import java.io.Serializable
 
-interface TaskInterface {
-    val name: Text
+interface TaskInterface: Serializable {
+    val name: String
+    val priority: String?
+    val state: String?
+    val spentTime: String?
 }

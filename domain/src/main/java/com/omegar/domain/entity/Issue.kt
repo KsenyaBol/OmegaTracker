@@ -6,5 +6,5 @@ interface Issue : Serializable {
     val id: String
     val resolved: Long?
     val summary: String
-    val customFields: List<CustomFields>?
+    val customFields: List<CustomFields>
 }
