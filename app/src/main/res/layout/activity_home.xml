@@ -21,6 +21,7 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/rubik_semibold"
@@ -28,7 +29,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/rv_activity_home_task_list"
-        app:layout_constraintStart_toStartOf="@+id/layout_activity_home_item_single_task"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_activity_home_item_single_task" />
 
     <com.omega_r.libs.omegarecyclerview.OmegaRecyclerView

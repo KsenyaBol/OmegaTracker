@@ -15,12 +15,11 @@
         <item name="android:windowBackground">@drawable/bg_splash_light</item>
         <item name="activityBackground">@color/white</item>
         <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.OmegaTracker.NoActionBar">
+        <!--    </style>-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.OmegaTracker.PurpleAccent">
         <item name="colorAccent">@color/purple</item>
     </style>

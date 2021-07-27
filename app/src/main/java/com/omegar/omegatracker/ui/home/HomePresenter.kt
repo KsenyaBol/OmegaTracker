@@ -3,13 +3,16 @@ package com.omegar.omegatracker.ui.home
 import com.omegar.data.entities.model.Task
 import com.omegar.domain.entity.TaskInterface
 import com.omegar.omegatracker.ui.base.BasePresenter
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class HomePresenter : BasePresenter<HomeView>() {
 
-    val taskName = mutableListOf<TaskInterface>()
+    companion object {
+        const val FORMAT = "%d:%02d:00"
+        const val MINUTES_PER_HOUR = 60
+        const val START_TIME = "00:00:00"
+    }
+
+    private val taskName = mutableListOf<TaskInterface>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -41,10 +44,12 @@ class HomePresenter : BasePresenter<HomeView>() {
         }
     }
 
-    fun timeFormat(time: Long?): String {
+    private fun timeFormat(time: Long?): String {
         return time?.let {
-            SimpleDateFormat("HH:mm:ss", Locale.ROOT).format(Date(TimeUnit.MINUTES.toMillis(it)))
-        } ?: "00:00:00"
+            val hours = time / MINUTES_PER_HOUR
+            val minutes = time % MINUTES_PER_HOUR
+            String.format(FORMAT, hours, minutes)
+        } ?: START_TIME
     }
 
     fun taskItemClicked(item: TaskInterface) {

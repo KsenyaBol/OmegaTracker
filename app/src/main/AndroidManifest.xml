@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OmegaTracker">
         <activity android:name=".ui.home.HomeActivity"></activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:theme="@style/Theme.OmegaTracker.NoActionBar">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

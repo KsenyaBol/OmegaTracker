@@ -23,14 +23,16 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     private val singleTaskCard: FrameLayout by bind(R.id.layout_activity_home_item_single_task)
     private val singleTaskName: TextView by bind(R.id.tv_item_single_task_name)
-    lateinit var adapter: OmegaAutoAdapter<TaskInterface, OmegaAutoAdapter.ViewHolder<TaskInterface>>
+    private val singleTaskTime: TextView by bind(R.id.tv_item_single_task_time)
 
     override fun init(list: List<TaskInterface>) {
-        adapter = OmegaAutoAdapter.create(R.layout.item_task, { item ->
+        val adapter = OmegaAutoAdapter.create<TaskInterface>(R.layout.item_task, { item ->
             presenter.taskItemClicked(item)
         }) {
             bindString(R.id.tv_item_task_name, Task::name)
             bindString(R.id.tv_item_task_time, Task::spentTime)
+            bindString(R.id.tv_item_task_priority, Task::priority)
+            bindString(R.id.tv_item_task_state, Task::state)
         }
         val taskList: OmegaRecyclerView by bind(R.id.rv_activity_home_task_list, adapter)
         adapter.list = list
@@ -46,5 +48,6 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     override fun setSingleTaskFields(task: TaskInterface) {
         singleTaskName.text = task.name
+        singleTaskTime.text = task.spentTime
     }
 }
