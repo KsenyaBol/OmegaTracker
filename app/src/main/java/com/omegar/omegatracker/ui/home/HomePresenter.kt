@@ -56,4 +56,8 @@ class HomePresenter : BasePresenter<HomeView>() {
         viewState.setSingleTaskFields(item)
         viewState.setSingleTaskVisibility(true)
     }
+
+    fun activateTask(isActive: Boolean) {
+        viewState.setTaskActive(!isActive)
+    }
 }

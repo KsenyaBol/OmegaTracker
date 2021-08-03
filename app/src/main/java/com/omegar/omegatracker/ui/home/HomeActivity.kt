@@ -2,8 +2,11 @@ package com.omegar.omegatracker.ui.home
 
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import com.omega_r.bind.adapters.OmegaAutoAdapter
 import com.omega_r.bind.model.binders.bindCustom
 import com.omega_r.bind.model.binders.bindString
@@ -28,10 +31,22 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     private val singleTaskCard: FrameLayout by bind(R.id.layout_activity_home_item_single_task)
     private val singleTaskName: TextView by bind(R.id.tv_item_single_task_name)
     private val singleTaskTime: TextView by bind(R.id.tv_item_single_task_time)
+    private val singleTaskStartBtn: ImageView by bind(R.id.iv_item_single_task_arrow)
+    private val singleTaskProgress: ProgressBar by bind(R.id.pb_item_single_task_progress)
 
     override fun init(list: List<TaskInterface>) {
+        initRecyclerView(list)
+        initListeners()
+    }
+
+    private fun initListeners() {
+        singleTaskStartBtn.setOnClickListener { presenter.activateTask(singleTaskProgress.isVisible) }
+    }
+
+    private fun initRecyclerView(list: List<TaskInterface>) {
         val adapter = OmegaAutoAdapter.create<TaskInterface>(R.layout.item_task, { item ->
             presenter.taskItemClicked(item)
+            singleTaskProgress.visibility = View.INVISIBLE
         }) {
             bindCustom(R.id.cv_item_task_priority) { cv: CardView, item: TaskInterface ->
                 when (item.priority) {
@@ -128,5 +143,10 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     override fun setSingleTaskFields(task: TaskInterface) {
         singleTaskName.text = task.name
         singleTaskTime.text = task.spentTime
+    }
+
+    override fun setTaskActive(isActive: Boolean) {
+        if (isActive) singleTaskProgress.visibility = View.VISIBLE
+        else singleTaskProgress.visibility = View.INVISIBLE
     }
 }

@@ -14,4 +14,7 @@ interface HomeView : BaseView {
 
     @StateStrategyType(StrategyType.ADD_TO_END)
     fun setSingleTaskFields(task: TaskInterface)
+
+    @StateStrategyType(StrategyType.ADD_TO_END)
+    fun setTaskActive(isActive: Boolean)
 }
