@@ -11,7 +11,7 @@
     tools:context=".ui.login.LoginActivity">
 
     <ImageView
-        android:id="@+id/iv_activity_login"
+        android:id="@+id/image_activity_login"
         android:layout_width="match_parent"
         android:layout_height="156dp"
         android:layout_gravity="center"
@@ -19,7 +19,7 @@
         android:src="@drawable/logo_black" />
 
     <TextView
-        android:id="@+id/tv_activity_login_welcome"
+        android:id="@+id/text_activity_login_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/double_padding"
@@ -30,7 +30,7 @@
         android:textSize="@dimen/title_text_size" />
 
     <EditText
-        android:id="@+id/et_activity_login_login"
+        android:id="@+id/input_activity_login_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/standard_padding"
@@ -43,7 +43,7 @@
         android:selectAllOnFocus="true" />
 
     <EditText
-        android:id="@+id/et_activity_login_password"
+        android:id="@+id/input_activity_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -57,7 +57,7 @@
         android:selectAllOnFocus="true" />
 
     <Button
-        android:id="@+id/btn_activity_login_start"
+        android:id="@+id/button_activity_login_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
