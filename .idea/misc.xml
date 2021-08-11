@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/activity_home.xml" value="0.13020833333333334" />
-        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/item_single_task.xml" value="0.4" />
-        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/item_task.xml" value="0.13020833333333334" />
-        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/toolbar.xml" value="0.13020833333333334" />
+        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/activity_home.xml" value="0.12291666666666666" />
+        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
+        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/item_single_task.xml" value="0.12291666666666666" />
+        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/item_task.xml" value="0.12291666666666666" />
+        <entry key="..\:/MyAndroid/MyProjects/Work/Omega/OmegaTracker/app/src/main/res/layout/toolbar.xml" value="0.12291666666666666" />
       </map>
     </option>
   </component>

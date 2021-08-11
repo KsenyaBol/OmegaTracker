@@ -17,23 +17,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_activity_home_today"
+        android:id="@+id/button_activity_home_today"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
         android:fontFamily="@font/rubik_semibold"
         android:text="@string/label_today"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_activity_home_task_list"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_activity_home_task_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_activity_home_item_single_task" />
 
     <com.omega_r.libs.omegarecyclerview.OmegaRecyclerView
-        android:id="@+id/rv_activity_home_task_list"
+        android:id="@+id/recycler_activity_home_task_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -41,11 +41,11 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_activity_home_today"
+        app:layout_constraintTop_toBottomOf="@+id/button_activity_home_today"
         tools:listitem="@layout/item_task" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_activity_home_see_all"
+        android:id="@+id/button_activity_home_see_all"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
@@ -54,9 +54,9 @@
         android:text="@string/label_see_all"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_activity_home_today"
+        app:layout_constraintBottom_toBottomOf="@+id/button_activity_home_today"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_activity_home_today" />
+        app:layout_constraintTop_toTopOf="@+id/button_activity_home_today" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

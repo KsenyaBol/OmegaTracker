@@ -18,50 +18,50 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_item_task_ava"
+                android:id="@+id/image_item_task_ava"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_item_task_name"
+                app:layout_constraintEnd_toStartOf="@+id/text_item_task_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_monitor_circle" />
 
             <TextView
-                android:id="@+id/tv_item_task_name"
+                android:id="@+id/text_item_task_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/rubik_bold"
                 android:text="@string/name"
-                app:layout_constraintEnd_toStartOf="@+id/tv_item_task_time"
-                app:layout_constraintStart_toEndOf="@+id/iv_item_task_ava"
+                app:layout_constraintEnd_toStartOf="@+id/text_item_task_time"
+                app:layout_constraintStart_toEndOf="@+id/image_item_task_ava"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_item_task_time"
+                android:id="@+id/text_item_task_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@string/time_zero"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_item_task_name"
+                app:layout_constraintBottom_toBottomOf="@+id/text_item_task_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_item_task_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_item_task_name" />
+                app:layout_constraintStart_toEndOf="@+id/text_item_task_name"
+                app:layout_constraintTop_toTopOf="@+id/text_item_task_name" />
 
             <ImageButton
-                android:id="@+id/btn_item_task_start"
+                android:id="@+id/button_item_task_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="@+id/tv_item_task_time"
+                app:layout_constraintEnd_toEndOf="@+id/text_item_task_time"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout"
                 app:srcCompat="@drawable/ic_triangle_arrow" />
@@ -70,25 +70,25 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_item_task_start"
-                app:layout_constraintStart_toEndOf="@+id/iv_item_task_ava"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_task_name">
+                app:layout_constraintEnd_toStartOf="@+id/button_item_task_start"
+                app:layout_constraintStart_toEndOf="@+id/image_item_task_ava"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_task_name">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_item_task_priority"
+                    android:id="@+id/card_view_item_task_priority"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     app:cardCornerRadius="12dp">
 
                     <TextView
-                        android:id="@+id/tv_item_task_priority"
+                        android:id="@+id/text_item_task_priority"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="6dp"
@@ -98,14 +98,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_item_task_state"
+                    android:id="@+id/card_view_item_task_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     app:cardCornerRadius="12dp">
 
                     <TextView
-                        android:id="@+id/tv_item_task_state"
+                        android:id="@+id/text_item_task_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="6dp"
