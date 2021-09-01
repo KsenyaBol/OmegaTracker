@@ -1,8 +1,8 @@
 package com.omegar.data.repository
 
 import com.omega_r.base.annotations.AppOmegaRepository
-import com.omegar.data.entities.ResponseIssues
-import com.omegar.data.entities.ResponseUserProfile
+import com.omegar.data.entities.api.ResponseIssues
+import com.omegar.data.entities.api.ResponseUserProfile
 
 @AppOmegaRepository
 interface ApiRepository {

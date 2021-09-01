@@ -1,7 +1,7 @@
 package com.omegar.data.api
 
-import com.omegar.data.entities.ResponseIssues
-import com.omegar.data.entities.ResponseUserProfile
+import com.omegar.data.entities.api.ResponseIssues
+import com.omegar.data.entities.api.ResponseUserProfile
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

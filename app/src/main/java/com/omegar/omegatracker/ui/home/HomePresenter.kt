@@ -1,18 +1,15 @@
 package com.omegar.omegatracker.ui.home
 
-import com.omegar.data.entities.model.Task
-import com.omegar.domain.entity.TaskInterface
+import com.omegar.data.entities.api.ResponseValue
+import com.omegar.data.entities.enumcollection.ValueType
+import com.omegar.data.entities.model.TaskImpl
+import com.omegar.domain.entity.Task
 import com.omegar.omegatracker.ui.base.BasePresenter
+import com.omegar.omegatracker.utils.timeFormat
 
 class HomePresenter : BasePresenter<HomeView>() {
 
-    companion object {
-        const val FORMAT = "%d:%02d:00"
-        const val MINUTES_PER_HOUR = 60
-        const val START_TIME = "00:00:00"
-    }
-
-    private val taskName = mutableListOf<TaskInterface>()
+    private val taskName = mutableListOf<Task>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -23,20 +20,20 @@ class HomePresenter : BasePresenter<HomeView>() {
                 "id,summary,resolved,customFields(name,value(minutes,name,presentation))"
             )
             taskName.clear()
-            listIssues.forEach {
+            listIssues.forEach { it ->
                 it.summary
                 taskName.add(
-                    Task(
+                    TaskImpl(
                         it.summary,
-                        priority = it.customFields.find {
-                            it.name.contains("Priority")
-                        }?.value?.get(0)?.name,
-                        state = it.customFields.find {
-                            it.name.contains("State")
-                        }?.value?.get(0)?.name,
-                        spentTime = timeFormat(it.customFields.find {
-                            it.name.contains("Spent time")
-                        }?.value?.get(0)?.minutes)
+                        priority = (it.customFields.find {
+                            it.valueType.searchName.contains(ValueType.PRIORITY.searchName)
+                        } as ResponseValue.ResponsePriority).value?.name,
+                        state = (it.customFields.find {
+                            it.valueType.searchName.contains(ValueType.STATE.searchName)
+                        } as ResponseValue.ResponseState).value?.name,
+                        spentTime = (it.customFields.find {
+                            it.valueType.searchName.contains(ValueType.SPENT_TIME.searchName)
+                        } as ResponseValue.ResponseSpentTime).value?.minutes.timeFormat()
                     )
                 )
                 viewState.init(taskName)
@@ -44,15 +41,7 @@ class HomePresenter : BasePresenter<HomeView>() {
         }
     }
 
-    private fun timeFormat(time: Long?): String {
-        return time?.let {
-            val hours = time / MINUTES_PER_HOUR
-            val minutes = time % MINUTES_PER_HOUR
-            String.format(FORMAT, hours, minutes)
-        } ?: START_TIME
-    }
-
-    fun taskItemClicked(item: TaskInterface) {
+    fun taskItemClicked(item: Task) {
         viewState.setSingleTaskFields(item)
         viewState.setSingleTaskVisibility(true)
     }

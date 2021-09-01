@@ -1,17 +1,13 @@
-package com.omegar.data.entities
+package com.omegar.data.entities.api
 
-import com.omegar.domain.entity.CustomFieldsValue
+import com.omegar.domain.entity.api.SpentTimeValue
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ResponseCustomFieldsValue(
-    @Json(name = "name")
-    override val name: String?,
-
+data class ResponseSpentTimeValue(
     @Json(name = "presentation")
     override val presentation: String?,
-
     @Json(name = "minutes")
     override val minutes: Long?
-) : CustomFieldsValue
+) : SpentTimeValue

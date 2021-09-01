@@ -1,4 +1,4 @@
-package com.omegar.data.entities.model
+package com.omegar.data.entities.enumcollection
 
 import com.omegar.data.R
 

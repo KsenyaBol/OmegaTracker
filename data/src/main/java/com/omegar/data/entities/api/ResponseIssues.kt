@@ -1,6 +1,6 @@
-package com.omegar.data.entities
+package com.omegar.data.entities.api
 
-import com.omegar.domain.entity.Issue
+import com.omegar.domain.entity.api.Issue
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -16,5 +16,5 @@ data class ResponseIssues(
     override val summary: String,
 
     @Json(name = "customFields")
-    override val customFields: List<ResponseCustomFields>,
+    override val customFields: List<ResponseValue>,
 ) : Issue

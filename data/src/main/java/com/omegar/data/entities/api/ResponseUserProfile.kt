@@ -1,4 +1,4 @@
-package com.omegar.data.entities
+package com.omegar.data.entities.api
 
 import com.omegar.domain.entity.UserProfile
 import com.squareup.moshi.Json

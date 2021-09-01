@@ -156,6 +156,7 @@ object Omega {
 object Moshi {
     const val moshi_kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    const val moshi_adapter = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
 }
 
 object Retrofit {

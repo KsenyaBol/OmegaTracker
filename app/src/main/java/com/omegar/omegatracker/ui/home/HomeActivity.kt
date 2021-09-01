@@ -11,10 +11,10 @@ import com.omega_r.bind.adapters.OmegaAutoAdapter
 import com.omega_r.bind.model.binders.bindCustom
 import com.omega_r.bind.model.binders.bindString
 import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView
-import com.omegar.data.entities.model.Priority
-import com.omegar.data.entities.model.State
-import com.omegar.data.entities.model.Task
-import com.omegar.domain.entity.TaskInterface
+import com.omegar.data.entities.enumcollection.Priority
+import com.omegar.data.entities.enumcollection.State
+import com.omegar.data.entities.model.TaskImpl
+import com.omegar.domain.entity.Task
 import com.omegar.libs.omegalaunchers.createActivityLauncher
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     private val singleTaskStartBtn: ImageView by bind(R.id.image_item_single_task_arrow)
     private val singleTaskProgress: ProgressBar by bind(R.id.progress_item_single_task_progress)
 
-    override fun init(list: List<TaskInterface>) {
+    override fun init(list: List<Task>) {
         initRecyclerView(list)
         initListeners()
     }
@@ -43,22 +43,22 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
         singleTaskStartBtn.setOnClickListener { presenter.activateTask(singleTaskProgress.isVisible) }
     }
 
-    private fun initRecyclerView(list: List<TaskInterface>) {
-        val adapter = OmegaAutoAdapter.create<TaskInterface>(R.layout.item_task, { item ->
+    private fun initRecyclerView(list: List<Task>) {
+        val adapter = OmegaAutoAdapter.create<Task>(R.layout.item_task, { item ->
             presenter.taskItemClicked(item)
             singleTaskProgress.visibility = View.INVISIBLE
         }) {
-            bindCustom(R.id.card_view_item_task_priority) { cv: CardView, item: TaskInterface ->
+            bindCustom(R.id.card_view_item_task_priority) { cv: CardView, item: Task ->
                 when (item.priority) {
                     null -> cv.visibility = View.GONE
                 }
             }
-            bindString(R.id.text_item_task_name, Task::name)
-            bindString(R.id.text_item_task_time, Task::spentTime)
-            bindCustom(R.id.text_item_task_priority) { tv: TextView, item: TaskInterface ->
+            bindString(R.id.text_item_task_name, TaskImpl::name)
+            bindString(R.id.text_item_task_time, TaskImpl::spentTime)
+            bindCustom(R.id.text_item_task_priority) { tv: TextView, item: Task ->
                 setPriorityViewParameters(tv, item)
             }
-            bindCustom(R.id.text_item_task_state) { tv: TextView, item: TaskInterface ->
+            bindCustom(R.id.text_item_task_state) { tv: TextView, item: Task ->
                 setStateViewParameters(tv, item)
             }
         }
@@ -69,7 +69,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     private fun setStateViewParameters(
         stateTextView: TextView,
-        item: TaskInterface
+        item: Task
     ) {
         stateTextView.text = item.state
         when (item.state) {
@@ -106,7 +106,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     private fun setPriorityViewParameters(
         priorityTextView: TextView,
-        item: TaskInterface
+        item: Task
     ) {
         priorityTextView.text = item.priority
         when (item.priority?.uppercase()) {
@@ -140,7 +140,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
         }
     }
 
-    override fun setSingleTaskFields(task: TaskInterface) {
+    override fun setSingleTaskFields(task: Task) {
         singleTaskName.text = task.name
         singleTaskTime.text = task.spentTime
     }

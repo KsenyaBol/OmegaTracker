@@ -4,10 +4,12 @@ import android.content.Context
 import com.omega_r.base.errors.ErrorHandler
 import com.omega_r.base.remote.CoroutineCallAdapterFactory
 import com.omegar.data.AppErrorHandler
-import com.omegar.data.SingleToArrayAdapter
 import com.omegar.data.api.TrackerApi
+import com.omegar.data.entities.api.ResponseValue
+import com.omegar.data.entities.enumcollection.ValueType
 import com.omegar.omegatracker.BuildConfig
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -47,7 +49,16 @@ class RetrofitModule {
     @Singleton
     fun provideMoshi(context: Context): Moshi {
         return Moshi.Builder()
-            .add(SingleToArrayAdapter.INSTANCE)
+            .add(
+                PolymorphicJsonAdapterFactory.of(ResponseValue::class.java, "name")
+                    .withSubtype(ResponseValue.ResponsePriority::class.java, ValueType.PRIORITY.searchName)
+                    .withSubtype(ResponseValue.ResponseState::class.java, ValueType.STATE.searchName)
+                    .withSubtype(
+                        ResponseValue.ResponseSpentTime::class.java,
+                        ValueType.SPENT_TIME.searchName
+                    )
+                    .withDefaultValue(ResponseValue.UnknownEntity())
+            )
             .add(KotlinJsonAdapterFactory())
             .build()
     }

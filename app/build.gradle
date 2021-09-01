@@ -119,6 +119,7 @@ dependencies {
 
     //moshi
     implementation Moshi.moshi_kotlin
+    implementation Moshi.moshi_adapter
     kapt Moshi.moshi_codegen
 
     //retrofit
