@@ -1,6 +1,8 @@
 package com.omegar.domain.entity
 
-interface UserProfile {
+import java.io.Serializable
+
+interface UserProfile : Serializable {
     val id: String
     val email: String?
     val login: String?

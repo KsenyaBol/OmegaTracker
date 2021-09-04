@@ -1,6 +1,7 @@
 package com.omegar.omegatracker.di
 
-import com.omegar.data.repository.ApiRepository
+import com.omegar.domain.repository.IssueRepository
+import com.omegar.domain.repository.LoginRepository
 import com.omegar.omegatracker.di.modules.ContextModule
 import com.omegar.omegatracker.di.modules.RepositoryModule
 import com.omegar.omegatracker.di.modules.RetrofitModule
@@ -17,5 +18,6 @@ import javax.inject.Singleton
 )
 
 interface AppComponent {
-    fun getApiRepository(): ApiRepository
+    fun getLoginRepository(): LoginRepository
+    fun getIssueRepository(): IssueRepository
 }

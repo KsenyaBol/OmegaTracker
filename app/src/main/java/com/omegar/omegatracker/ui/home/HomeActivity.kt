@@ -16,6 +16,7 @@ import com.omegar.data.entities.enumcollection.State
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
 import com.omegar.libs.omegalaunchers.createActivityLauncher
+import com.omegar.libs.omegalaunchers.tools.BundlePair
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BaseActivity
@@ -23,16 +24,39 @@ import com.omegar.omegatracker.ui.base.BaseActivity
 class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     companion object {
-        fun newInstance() = createActivityLauncher()
+        private const val AUTHORIZATION_TOKEN = "token"
+        fun newInstance(authToken: BundlePair) = createActivityLauncher(authToken)
     }
 
-    override val presenter: HomePresenter by providePresenter()
+    override val presenter: HomePresenter by providePresenter {
+        HomePresenter(intent.extras?.getString(AUTHORIZATION_TOKEN))
+    }
 
-    private val singleTaskCard: FrameLayout by bind(R.id.layout_activity_home_item_single_task)
+    private val singleTaskCard: FrameLayout by bind(R.id.layout_home_item_single_task)
     private val singleTaskName: TextView by bind(R.id.text_item_single_task_name)
     private val singleTaskTime: TextView by bind(R.id.text_item_single_task_time)
     private val singleTaskStartBtn: ImageView by bind(R.id.image_item_single_task_arrow)
     private val singleTaskProgress: ProgressBar by bind(R.id.progress_item_single_task_progress)
+    private val adapter = OmegaAutoAdapter.create<Task>(R.layout.item_task, { item ->
+        presenter.taskItemClicked(item)
+        singleTaskProgress.visibility = View.INVISIBLE
+    }) {
+        bindCustom(R.id.card_view_item_task_priority) { cv: CardView, item: Task ->
+            when (item.priority) {
+                null -> cv.visibility = View.GONE
+            }
+        }
+        bindString(R.id.text_item_task_name, TaskImpl::name)
+        bindString(R.id.text_item_task_time, TaskImpl::spentTime)
+        bindCustom(R.id.text_item_task_priority) { tv: TextView, item: Task ->
+            setPriorityViewParameters(tv, item)
+        }
+        bindCustom(R.id.text_item_task_state) { tv: TextView, item: Task ->
+            setStateViewParameters(tv, item)
+        }
+    }
+    private val taskList: OmegaRecyclerView by bind(R.id.recyclerview_home_tasks, adapter)
+
 
     override fun init(list: List<Task>) {
         initRecyclerView(list)
@@ -40,29 +64,12 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     }
 
     private fun initListeners() {
-        singleTaskStartBtn.setOnClickListener { presenter.activateTask(singleTaskProgress.isVisible) }
+        setOnClickListener(R.id.image_item_single_task_arrow) {
+            presenter.activateTask(singleTaskProgress.isVisible)
+        }
     }
 
     private fun initRecyclerView(list: List<Task>) {
-        val adapter = OmegaAutoAdapter.create<Task>(R.layout.item_task, { item ->
-            presenter.taskItemClicked(item)
-            singleTaskProgress.visibility = View.INVISIBLE
-        }) {
-            bindCustom(R.id.card_view_item_task_priority) { cv: CardView, item: Task ->
-                when (item.priority) {
-                    null -> cv.visibility = View.GONE
-                }
-            }
-            bindString(R.id.text_item_task_name, TaskImpl::name)
-            bindString(R.id.text_item_task_time, TaskImpl::spentTime)
-            bindCustom(R.id.text_item_task_priority) { tv: TextView, item: Task ->
-                setPriorityViewParameters(tv, item)
-            }
-            bindCustom(R.id.text_item_task_state) { tv: TextView, item: Task ->
-                setStateViewParameters(tv, item)
-            }
-        }
-        val taskList: OmegaRecyclerView by bind(R.id.recycler_activity_home_task_list, adapter)
         adapter.list = list
         taskList.adapter = adapter
     }

@@ -1,8 +1,7 @@
 package com.omegar.omegatracker.ui.login
 
-import android.view.View
-import com.omega_r.libs.omegatypes.Text
-import com.omega_r.libs.omegatypes.toast
+import android.widget.Button
+import android.widget.EditText
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BaseActivity
@@ -10,13 +9,10 @@ import com.omegar.omegatracker.ui.base.BaseActivity
 class LoginActivity : BaseActivity(R.layout.activity_login), LoginView {
     override val presenter: LoginPresenter by providePresenter()
 
-    private val buttonLogin: View by bind(R.id.button_activity_login_start) {
+    private val inputToken: EditText by bind(R.id.input_login_token)
+    private val buttonLogin: Button by bind(R.id.button_login_start) {
         setClickListener {
-            presenter.requestLogin()
+            presenter.requestLogin(inputToken.text.toString())
         }
-    }
-
-    override fun showToast(message: Text) {
-        toast(message)
     }
 }

@@ -11,7 +11,7 @@
     tools:context=".ui.login.LoginActivity">
 
     <ImageView
-        android:id="@+id/image_activity_login"
+        android:id="@+id/image_login"
         android:layout_width="match_parent"
         android:layout_height="156dp"
         android:layout_gravity="center"
@@ -19,7 +19,7 @@
         android:src="@drawable/logo_black" />
 
     <TextView
-        android:id="@+id/text_activity_login_welcome"
+        android:id="@+id/text_login_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/double_padding"
@@ -30,34 +30,21 @@
         android:textSize="@dimen/title_text_size" />
 
     <EditText
-        android:id="@+id/input_activity_login_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/standard_padding"
-        android:layout_marginTop="@dimen/double_padding"
-        android:background="@drawable/selector_round_corner"
-        android:fontFamily="@font/rubik_regular"
-        android:hint="@string/label_email"
-        android:inputType="textPersonName"
-        android:padding="15dp"
-        android:selectAllOnFocus="true" />
-
-    <EditText
-        android:id="@+id/input_activity_login_password"
+        android:id="@+id/input_login_token"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/selector_round_corner"
         android:fontFamily="@font/rubik_regular"
-        android:hint="@string/label_password"
+        android:hint="@string/label_token"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:padding="15dp"
         android:selectAllOnFocus="true" />
 
     <Button
-        android:id="@+id/button_activity_login_start"
+        android:id="@+id/button_login_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

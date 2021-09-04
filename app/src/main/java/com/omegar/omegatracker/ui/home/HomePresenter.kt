@@ -5,35 +5,33 @@ import com.omegar.data.entities.enumcollection.ValueType
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
 import com.omegar.omegatracker.ui.base.BasePresenter
-import com.omegar.omegatracker.utils.timeFormat
+import com.omegar.omegatracker.utils.toTimeFormat
 
-class HomePresenter : BasePresenter<HomeView>() {
+class HomePresenter(private val authToken: String?) : BasePresenter<HomeView>() {
 
     private val taskName = mutableListOf<Task>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         launchWithWaiting {
-            val listIssues = apiRepository.getIssues(
-                TOKEN,
-                "for:me",
-                "id,summary,resolved,customFields(name,value(minutes,name,presentation))"
-            )
+            val listIssues = authToken?.let { token ->
+                issueRepository.getIssuesForMe(token)
+            }
             taskName.clear()
-            listIssues.forEach { it ->
-                it.summary
+            listIssues?.forEach { issue ->
+                issue.summary
                 taskName.add(
                     TaskImpl(
-                        it.summary,
-                        priority = (it.customFields.find {
-                            it.valueType.searchName.contains(ValueType.PRIORITY.searchName)
+                        issue.summary,
+                        priority = (issue.customFields.find {
+                            (it as ResponseValue).valueType.searchName.contains(ValueType.PRIORITY.searchName)
                         } as ResponseValue.ResponsePriority).value?.name,
-                        state = (it.customFields.find {
-                            it.valueType.searchName.contains(ValueType.STATE.searchName)
+                        state = (issue.customFields.find {
+                            (it as ResponseValue).valueType.searchName.contains(ValueType.STATE.searchName)
                         } as ResponseValue.ResponseState).value?.name,
-                        spentTime = (it.customFields.find {
-                            it.valueType.searchName.contains(ValueType.SPENT_TIME.searchName)
-                        } as ResponseValue.ResponseSpentTime).value?.minutes.timeFormat()
+                        spentTime = (issue.customFields.find {
+                            (it as ResponseValue).valueType.searchName.contains(ValueType.SPENT_TIME.searchName)
+                        } as ResponseValue.ResponseSpentTime).value?.minutes.toTimeFormat()
                     )
                 )
                 viewState.init(taskName)
