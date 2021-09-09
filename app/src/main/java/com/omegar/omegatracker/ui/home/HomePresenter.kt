@@ -25,13 +25,13 @@ class HomePresenter(private val authToken: String?) : BasePresenter<HomeView>() 
                         issue.summary,
                         priority = (issue.customFields.find {
                             (it as ResponseValue).valueType.searchName.contains(ValueType.PRIORITY.searchName)
-                        } as ResponseValue.ResponsePriority).value?.name,
+                        } as ResponseValue.ResponsePriority?)?.let { it.value?.name },
                         state = (issue.customFields.find {
                             (it as ResponseValue).valueType.searchName.contains(ValueType.STATE.searchName)
-                        } as ResponseValue.ResponseState).value?.name,
+                        } as ResponseValue.ResponseState?)?.let { it.value?.name },
                         spentTime = (issue.customFields.find {
                             (it as ResponseValue).valueType.searchName.contains(ValueType.SPENT_TIME.searchName)
-                        } as ResponseValue.ResponseSpentTime).value?.minutes.toTimeFormat()
+                        } as ResponseValue.ResponseSpentTime?)?.let { it.value?.minutes.toTimeFormat() }
                     )
                 )
                 viewState.init(taskName)

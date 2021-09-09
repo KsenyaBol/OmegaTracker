@@ -46,6 +46,11 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
                 null -> cv.visibility = View.GONE
             }
         }
+        bindCustom(R.id.card_view_item_task_state) { cv: CardView, item: Task ->
+            when (item.state) {
+                null -> cv.visibility = View.GONE
+            }
+        }
         bindString(R.id.text_item_task_name, TaskImpl::name)
         bindString(R.id.text_item_task_time, TaskImpl::spentTime)
         bindCustom(R.id.text_item_task_priority) { tv: TextView, item: Task ->
