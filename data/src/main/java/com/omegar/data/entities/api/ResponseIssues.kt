@@ -1,6 +1,6 @@
 package com.omegar.data.entities.api
 
-import com.omegar.domain.entity.api.Issue
+import com.omegar.domain.entity.api.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -16,5 +16,10 @@ data class ResponseIssues(
     override val summary: String,
 
     @Json(name = "customFields")
-    override val customFields: List<ResponseValue>,
-) : Issue
+    override val customFields: List<CustomFields>,
+) : Issue {
+    override fun getPriority(): Priority? = customFields.filterIsInstance<Priority>().firstOrNull()
+    override fun getState(): State? = customFields.filterIsInstance<State>().firstOrNull()
+    override fun getSpentTime(): SpentTime? =
+        customFields.filterIsInstance<SpentTime>().firstOrNull()
+}

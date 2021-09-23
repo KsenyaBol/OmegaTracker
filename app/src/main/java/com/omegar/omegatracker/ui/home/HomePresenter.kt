@@ -1,7 +1,5 @@
 package com.omegar.omegatracker.ui.home
 
-import com.omegar.data.entities.api.ResponseValue
-import com.omegar.data.entities.enumcollection.ValueType
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
 import com.omegar.omegatracker.ui.base.BasePresenter
@@ -23,19 +21,13 @@ class HomePresenter(private val authToken: String?) : BasePresenter<HomeView>() 
                 taskName.add(
                     TaskImpl(
                         issue.summary,
-                        priority = (issue.customFields.find {
-                            (it as ResponseValue).valueType.searchName.contains(ValueType.PRIORITY.searchName)
-                        } as ResponseValue.ResponsePriority?)?.let { it.value?.name },
-                        state = (issue.customFields.find {
-                            (it as ResponseValue).valueType.searchName.contains(ValueType.STATE.searchName)
-                        } as ResponseValue.ResponseState?)?.let { it.value?.name },
-                        spentTime = (issue.customFields.find {
-                            (it as ResponseValue).valueType.searchName.contains(ValueType.SPENT_TIME.searchName)
-                        } as ResponseValue.ResponseSpentTime?)?.let { it.value?.minutes.toTimeFormat() }
+                        issue.getPriority()?.value?.name,
+                        issue.getState()?.value?.name,
+                        (issue.getSpentTime()?.value?.minutes).toTimeFormat()
                     )
                 )
-                viewState.init(taskName)
             }
+            viewState.init(taskName)
         }
     }
 

@@ -7,5 +7,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ResponseStateValue(
     @Json(name = "name")
-    override val name: String?
+    override val name: String
 ) : StateValue

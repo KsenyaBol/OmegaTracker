@@ -5,8 +5,12 @@ import com.omega_r.base.errors.ErrorHandler
 import com.omega_r.base.remote.CoroutineCallAdapterFactory
 import com.omegar.data.AppErrorHandler
 import com.omegar.data.api.TrackerApi
-import com.omegar.data.entities.api.ResponseValue
+import com.omegar.data.entities.api.ResponsePriority
+import com.omegar.data.entities.api.ResponseSpentTime
+import com.omegar.data.entities.api.ResponseState
+import com.omegar.data.entities.api.ResponseUnknownEntity
 import com.omegar.data.entities.enumcollection.ValueType
+import com.omegar.domain.entity.api.CustomFields
 import com.omegar.omegatracker.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
@@ -50,14 +54,11 @@ class RetrofitModule {
     fun provideMoshi(context: Context): Moshi {
         return Moshi.Builder()
             .add(
-                PolymorphicJsonAdapterFactory.of(ResponseValue::class.java, "name")
-                    .withSubtype(ResponseValue.ResponsePriority::class.java, ValueType.PRIORITY.searchName)
-                    .withSubtype(ResponseValue.ResponseState::class.java, ValueType.STATE.searchName)
-                    .withSubtype(
-                        ResponseValue.ResponseSpentTime::class.java,
-                        ValueType.SPENT_TIME.searchName
-                    )
-                    .withDefaultValue(ResponseValue.UnknownEntity())
+                PolymorphicJsonAdapterFactory.of(CustomFields::class.java, "name")
+                    .withSubtype(ResponsePriority::class.java, ValueType.PRIORITY.searchName)
+                    .withSubtype(ResponseState::class.java, ValueType.STATE.searchName)
+                    .withSubtype(ResponseSpentTime::class.java, ValueType.SPENT_TIME.searchName)
+                    .withDefaultValue(ResponseUnknownEntity())
             )
             .add(KotlinJsonAdapterFactory())
             .build()
