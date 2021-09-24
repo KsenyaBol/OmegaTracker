@@ -7,7 +7,7 @@ interface Issue : Serializable {
     val resolved: Long?
     val summary: String
     val customFields: List<CustomFields>
-    fun getPriority(): Priority?
-    fun getState(): State?
-    fun getSpentTime(): SpentTime?
+    val priority: Priority?
+    val state: State?
+    val spentTime: SpentTime?
 }

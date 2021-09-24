@@ -7,7 +7,7 @@ import com.omegar.omegatracker.ui.base.BaseView
 
 interface HomeView : BaseView {
     @StateStrategyType(StrategyType.ADD_TO_END_SINGLE)
-    fun init(list: List<Task>)
+    fun setTasks(list: List<Task>)
 
     @StateStrategyType(StrategyType.ADD_TO_END_SINGLE)
     fun setSingleTaskVisibility(isVisible: Boolean)

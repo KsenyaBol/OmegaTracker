@@ -18,8 +18,10 @@ data class ResponseIssues(
     @Json(name = "customFields")
     override val customFields: List<CustomFields>,
 ) : Issue {
-    override fun getPriority(): Priority? = customFields.filterIsInstance<Priority>().firstOrNull()
-    override fun getState(): State? = customFields.filterIsInstance<State>().firstOrNull()
-    override fun getSpentTime(): SpentTime? =
-        customFields.filterIsInstance<SpentTime>().firstOrNull()
+    override val priority: Priority?
+        get() = customFields.filterIsInstance<Priority>().firstOrNull()
+    override val state: State?
+        get() = customFields.filterIsInstance<State>().firstOrNull()
+    override val spentTime: SpentTime?
+        get() = customFields.filterIsInstance<SpentTime>().firstOrNull()
 }

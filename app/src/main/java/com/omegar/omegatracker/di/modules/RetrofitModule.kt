@@ -1,10 +1,9 @@
 package com.omegar.omegatracker.di.modules
 
-import android.content.Context
 import com.omega_r.base.errors.ErrorHandler
 import com.omega_r.base.remote.CoroutineCallAdapterFactory
 import com.omegar.data.AppErrorHandler
-import com.omegar.data.api.TrackerApi
+import com.omegar.data.api.YouTrackApi
 import com.omegar.data.entities.api.ResponsePriority
 import com.omegar.data.entities.api.ResponseSpentTime
 import com.omegar.data.entities.api.ResponseState
@@ -51,7 +50,7 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideMoshi(context: Context): Moshi {
+    fun provideMoshi(): Moshi {
         return Moshi.Builder()
             .add(
                 PolymorphicJsonAdapterFactory.of(CustomFields::class.java, "name")
@@ -70,5 +69,6 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideTrackerApi(retrofit: Retrofit): TrackerApi = retrofit.create(TrackerApi::class.java)
+    fun provideTrackerApi(retrofit: Retrofit): YouTrackApi =
+        retrofit.create(YouTrackApi::class.java)
 }

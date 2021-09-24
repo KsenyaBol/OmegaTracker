@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">OmegaTracker</string>
+    //Login
     <string name="label_hello">Hello from Omega Tracker!</string>
-    <string name="label_email">email</string>
-    <string name="label_password">password</string>
     <string name="label_login">Login</string>
+    <string name="label_token">Token</string>
+    <string name="label_welcome">Welcome\u0020</string>
+    <string name="label_invalid_token">Invalid token</string>
+    //Home
     <string name="label_today">Today</string>
     <string name="label_see_all">See all</string>
-    <string name="title_time_zero">00:00:00</string>
-    <string name="title_name">name</string>
+    <string name="label_time_zero">00:00:00</string>
+    <string name="label_name">name</string>
     <string name="label_task">Task</string>
-    <string name="title_exit">Exit</string>
-    <string name="label_token">Token</string>
-    <string name="title_invalid_token">Invalid token</string>
+    <string name="label_exit">Exit</string>
 </resources>

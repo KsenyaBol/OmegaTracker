@@ -2,7 +2,7 @@ package com.omegar.data.entities.enumcollection
 
 import com.omegar.data.R
 
-enum class State(val searchName: String, val backgroundColor: Int, val textColor: Int) {
+enum class StateEnum(val searchName: String, val backgroundColor: Int, val textColor: Int) {
     IN_PROGRESS(
         "In Progress",
         R.color.light_blue_tag,
@@ -37,5 +37,10 @@ enum class State(val searchName: String, val backgroundColor: Int, val textColor
         "Not Cleared",
         R.color.black_tag,
         R.color.white_tag
+    ),
+    BACKLOG(
+        "Backlog",
+        R.color.white_tag,
+        R.color.black_tag
     )
 }

@@ -5,21 +5,24 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.omega_r.bind.adapters.OmegaAutoAdapter
 import com.omega_r.bind.model.binders.bindCustom
+import com.omega_r.bind.model.binders.bindNonNullVisible
 import com.omega_r.bind.model.binders.bindString
 import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView
-import com.omegar.data.entities.enumcollection.Priority
-import com.omegar.data.entities.enumcollection.State
+import com.omegar.data.entities.enumcollection.PriorityEnum
+import com.omegar.data.entities.enumcollection.StateEnum
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
+import com.omegar.domain.entity.api.SpentTime
 import com.omegar.libs.omegalaunchers.createActivityLauncher
 import com.omegar.libs.omegalaunchers.tools.BundlePair
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BaseActivity
+import com.omegar.omegatracker.utils.toTimeFormat
 
 class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
@@ -38,21 +41,16 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     private val singleTaskStartBtn: ImageView by bind(R.id.image_item_single_task_arrow)
     private val singleTaskProgress: ProgressBar by bind(R.id.progress_item_single_task_progress)
     private val adapter = OmegaAutoAdapter.create<Task>(R.layout.item_task, { item ->
-        presenter.taskItemClicked(item)
+        presenter.onTaskItemClicked(item)
         singleTaskProgress.visibility = View.INVISIBLE
     }) {
-        bindCustom(R.id.card_view_item_task_priority) { cv: CardView, item: Task ->
-            when (item.priority) {
-                null -> cv.visibility = View.GONE
-            }
-        }
-        bindCustom(R.id.card_view_item_task_state) { cv: CardView, item: Task ->
-            when (item.state) {
-                null -> cv.visibility = View.GONE
-            }
-        }
+        bindNonNullVisible(R.id.card_view_item_task_state, property = Task::state)
+        bindNonNullVisible(R.id.card_view_item_task_priority, property = Task::priority)
         bindString(R.id.text_item_task_name, TaskImpl::name)
-        bindString(R.id.text_item_task_time, TaskImpl::spentTime)
+        bindString(
+            R.id.text_item_task_time,
+            TaskImpl::spentTime,
+            formatter = { (it as SpentTime).value?.minutes.toTimeFormat() })
         bindCustom(R.id.text_item_task_priority) { tv: TextView, item: Task ->
             setPriorityViewParameters(tv, item)
         }
@@ -62,15 +60,14 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     }
     private val taskList: OmegaRecyclerView by bind(R.id.recyclerview_home_tasks, adapter)
 
-
-    override fun init(list: List<Task>) {
+    override fun setTasks(list: List<Task>) {
         initRecyclerView(list)
         initListeners()
     }
 
     private fun initListeners() {
         setOnClickListener(R.id.image_item_single_task_arrow) {
-            presenter.activateTask(singleTaskProgress.isVisible)
+            presenter.onTaskActiveRequest(singleTaskProgress.isVisible)
         }
     }
 
@@ -83,35 +80,63 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
         stateTextView: TextView,
         item: Task
     ) {
-        stateTextView.text = item.state
-        when (item.state) {
-            State.IN_PROGRESS.searchName -> {
-                stateTextView.setTextColor(getColor(State.IN_PROGRESS.textColor))
-                stateTextView.setBackgroundColor(getColor(State.IN_PROGRESS.backgroundColor))
+        stateTextView.text = item.state?.value?.name
+        when (item.state?.value?.name) {
+            StateEnum.IN_PROGRESS.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.IN_PROGRESS.textColor,
+                    StateEnum.IN_PROGRESS.backgroundColor
+                )
             }
-            State.REOPENED.searchName -> {
-                stateTextView.setTextColor(getColor(State.REOPENED.textColor))
-                stateTextView.setBackgroundColor(getColor(State.REOPENED.backgroundColor))
+            StateEnum.REOPENED.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.REOPENED.textColor,
+                    StateEnum.REOPENED.backgroundColor
+                )
             }
-            State.IN_REVIEW.searchName -> {
-                stateTextView.setTextColor(getColor(State.IN_REVIEW.textColor))
-                stateTextView.setBackgroundColor(getColor(State.IN_REVIEW.backgroundColor))
+            StateEnum.IN_REVIEW.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.IN_REVIEW.textColor,
+                    StateEnum.IN_REVIEW.backgroundColor
+                )
             }
-            State.IN_TESTING.searchName -> {
-                stateTextView.setTextColor(getColor(State.IN_TESTING.textColor))
-                stateTextView.setBackgroundColor(getColor(State.IN_TESTING.backgroundColor))
+            StateEnum.IN_TESTING.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.IN_TESTING.textColor,
+                    StateEnum.IN_TESTING.backgroundColor
+                )
             }
-            State.DONE.searchName -> {
-                stateTextView.setTextColor(getColor(State.DONE.textColor))
-                stateTextView.setBackgroundColor(getColor(State.DONE.backgroundColor))
+            StateEnum.DONE.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.DONE.textColor,
+                    StateEnum.DONE.backgroundColor
+                )
             }
-            State.FINISHED.searchName -> {
-                stateTextView.setTextColor(getColor(State.FINISHED.textColor))
-                stateTextView.setBackgroundColor(getColor(State.FINISHED.backgroundColor))
+            StateEnum.FINISHED.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.FINISHED.textColor,
+                    StateEnum.FINISHED.backgroundColor
+                )
             }
-            State.NOT_ClEARED.searchName -> {
-                stateTextView.setTextColor(getColor(State.NOT_ClEARED.textColor))
-                stateTextView.setBackgroundColor(getColor(State.NOT_ClEARED.backgroundColor))
+            StateEnum.NOT_ClEARED.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.NOT_ClEARED.textColor,
+                    StateEnum.NOT_ClEARED.backgroundColor
+                )
+            }
+            StateEnum.BACKLOG.searchName -> {
+                setTagSettings(
+                    stateTextView,
+                    StateEnum.BACKLOG.textColor,
+                    StateEnum.BACKLOG.backgroundColor
+                )
             }
         }
     }
@@ -120,45 +145,61 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
         priorityTextView: TextView,
         item: Task
     ) {
-        priorityTextView.text = item.priority
-        when (item.priority?.uppercase()) {
-            Priority.BLOCKER.name -> {
-                priorityTextView.setTextColor(getColor(Priority.BLOCKER.textColor))
-                priorityTextView.setBackgroundColor(getColor(Priority.BLOCKER.backgroundColor))
+        priorityTextView.text = item.priority?.value?.name
+        when (item.priority?.value?.name?.uppercase()) {
+            PriorityEnum.BLOCKER.name -> {
+                setTagSettings(
+                    priorityTextView,
+                    PriorityEnum.BLOCKER.textColor,
+                    PriorityEnum.BLOCKER.backgroundColor
+                )
             }
-            Priority.CRITICAL.name -> {
-                priorityTextView.setTextColor(getColor(Priority.CRITICAL.textColor))
-                priorityTextView.setBackgroundColor(getColor(Priority.CRITICAL.backgroundColor))
+            PriorityEnum.CRITICAL.name -> {
+                setTagSettings(
+                    priorityTextView,
+                    PriorityEnum.CRITICAL.textColor,
+                    PriorityEnum.CRITICAL.backgroundColor
+                )
             }
-            Priority.MAJOR.name -> {
-                priorityTextView.setTextColor(getColor(Priority.MAJOR.textColor))
-                priorityTextView.setBackgroundColor(getColor(Priority.MAJOR.backgroundColor))
+            PriorityEnum.MAJOR.name -> {
+                setTagSettings(
+                    priorityTextView,
+                    PriorityEnum.MAJOR.textColor,
+                    PriorityEnum.MAJOR.backgroundColor
+                )
             }
-            Priority.MINOR.name -> {
-                priorityTextView.setTextColor(getColor(Priority.MINOR.textColor))
-                priorityTextView.setBackgroundColor(getColor(Priority.MINOR.backgroundColor))
+            PriorityEnum.MINOR.name -> {
+                setTagSettings(
+                    priorityTextView,
+                    PriorityEnum.MINOR.textColor,
+                    PriorityEnum.MINOR.backgroundColor
+                )
             }
-            Priority.TRIVIAL.name -> {
-                priorityTextView.setTextColor(getColor(Priority.TRIVIAL.textColor))
-                priorityTextView.setBackgroundColor(getColor(Priority.TRIVIAL.backgroundColor))
+            PriorityEnum.TRIVIAL.name -> {
+                setTagSettings(
+                    priorityTextView,
+                    PriorityEnum.TRIVIAL.textColor,
+                    PriorityEnum.TRIVIAL.backgroundColor
+                )
             }
         }
     }
 
+    private fun setTagSettings(view: TextView, textColor: Int, backgroundColor: Int) {
+        view.setTextColor(getColor(textColor))
+        view.setBackgroundColor(getColor(backgroundColor))
+    }
+
     override fun setSingleTaskVisibility(isVisible: Boolean) {
-        with(singleTaskCard) {
-            if (isVisible) visibility = View.VISIBLE
-            else visibility = View.GONE
-        }
+        singleTaskCard.isVisible = isVisible
     }
 
     override fun setSingleTaskFields(task: Task) {
         singleTaskName.text = task.name
-        singleTaskTime.text = task.spentTime
+        singleTaskTime.text = (task.spentTime?.value?.minutes).toTimeFormat()
     }
 
     override fun setTaskActive(isActive: Boolean) {
-        if (isActive) singleTaskProgress.visibility = View.VISIBLE
-        else singleTaskProgress.visibility = View.INVISIBLE
+        singleTaskProgress.isInvisible = !isActive
     }
 }

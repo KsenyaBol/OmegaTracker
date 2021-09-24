@@ -1,6 +1,6 @@
 package com.omegar.omegatracker.di.modules
 
-import com.omegar.data.api.TrackerApi
+import com.omegar.data.api.YouTrackApi
 import com.omegar.data.repository.IssueRepositoryImpl
 import com.omegar.data.repository.LoginRepositoryImpl
 import com.omegar.domain.repository.IssueRepository
@@ -13,12 +13,12 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Provides
     @Singleton
-    fun providesLoginRepository(trackerApi: TrackerApi): LoginRepository =
-        LoginRepositoryImpl(trackerApi)
+    fun providesLoginRepository(youTrackApi: YouTrackApi): LoginRepository =
+        LoginRepositoryImpl(youTrackApi)
 
     @Provides
     @Singleton
-    fun providesIssueRepository(trackerApi: TrackerApi): IssueRepository =
-        IssueRepositoryImpl(trackerApi)
+    fun providesIssueRepository(youTrackApi: YouTrackApi): IssueRepository =
+        IssueRepositoryImpl(youTrackApi)
 
 }

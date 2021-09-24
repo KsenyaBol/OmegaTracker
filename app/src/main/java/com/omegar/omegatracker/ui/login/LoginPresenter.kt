@@ -24,7 +24,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
             try {
                 authToken = BASE_TOKEN + token
                 response = loginRepository.getUserInfo(authToken)
-                response.login?.let { viewState.showToast("Welcome ${it}".toText()) }
+                response.login?.let { viewState.showToast(Text.from(R.string.label_welcome) + it.toText()) }
                 HomeActivity.newInstance(AUTHORIZATION_TOKEN put authToken).launch()
             } catch (e: HttpException) {
                 throw TokenException()
@@ -34,7 +34,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
 
     override fun getErrorMessage(throwable: Throwable): Text {
         return when (throwable) {
-            is TokenException -> Text.from(R.string.title_invalid_token)
+            is TokenException -> Text.from(R.string.label_invalid_token)
             else -> super.getErrorMessage(throwable)
         }
     }

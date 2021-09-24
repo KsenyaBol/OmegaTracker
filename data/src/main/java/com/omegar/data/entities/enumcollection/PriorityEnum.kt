@@ -2,7 +2,7 @@ package com.omegar.data.entities.enumcollection
 
 import com.omegar.data.R
 
-enum class Priority(val backgroundColor: Int, val textColor: Int) {
+enum class PriorityEnum(val backgroundColor: Int, val textColor: Int) {
     BLOCKER(
         R.color.red_tag,
         R.color.white_tag
