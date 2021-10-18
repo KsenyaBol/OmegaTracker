@@ -1,28 +1,14 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.30"
-    ext.kotlin_corutines_version = '1.3.9'
-    ext.omegaBase_version = 'b674e1ee53df87ac746ba3feeb2ad83afd5eaf39'
-    ext.omegaMoxy_version = 'e7538fd'
-    ext.omegaTypes_version = '23ddc0a'
-    ext.omegaLaunchers_version = '1.0.3'
-    ext.omegaExtensions_version = '1.0.4'
-
-    ext.layouts_version = '0.0.1'
-    ext.retrofit_version = '2.9.0'
-    ext.moshi_version = '1.9.3'
-    ext.room_version = '2.2.6'
-
+    ext {
+        kotlin_version = '1.5.20'
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
     }
 }
 
@@ -31,6 +17,50 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')) {
+            android {
+                compileSdkVersion Config.compile_sdk
+                buildToolsVersion Config.build_tools
+
+                defaultConfig {
+                    minSdkVersion Config.min_sdk
+                    targetSdkVersion Config.target_sdk
+                    versionCode Releases.version_code
+                    versionName Releases.version_name
+                    consumerProguardFiles Releases.consumer_proguard_files
+                    testInstrumentationRunner Tests.runner
+                }
+                buildTypes {
+                    release {
+                        minifyEnabled false
+                        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                    }
+                }
+                compileOptions {
+                    sourceCompatibility Config.java_version
+                    targetCompatibility Config.java_version
+                }
+
+                kotlinOptions {
+                    jvmTarget = KotlinOptions.jvm_target
+                }
+            }
+            dependencies {
+                //Kotlin
+                implementation Kotlin.stdlib
+                implementation Kotlin.core
+
+                //Test
+                testImplementation TestImpl.junit
+                androidTestImplementation TestImpl.androidx_junit
+                androidTestImplementation TestImpl.espresso
+            }
+        }
     }
 }
 

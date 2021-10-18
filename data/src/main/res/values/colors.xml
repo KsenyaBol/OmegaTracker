@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red_tag">#F61100</color>
+    <color name="white_tag">#FFFFFF</color>
+    <color name="pink_tag">#CDFD85A1</color>
+    <color name="gray_tag">#B7000000</color>
+    <color name="light_green_tag">#E6FCF4</color>
+    <color name="green_tag">#277E2A</color>
+    <color name="light_gray_tag">#F2F2F2</color>
+    <color name="light_blue_tag">#CEE4F4</color>
+    <color name="orange_tag">#FFA656</color>
+    <color name="turquoise_tag">#A658CACA</color>
+    <color name="yellow_tag">#B7FFEB3B</color>
+    <color name="black_tag">#FF000000</color>
+</resources>
