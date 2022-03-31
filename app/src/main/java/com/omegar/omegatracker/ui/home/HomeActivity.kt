@@ -1,5 +1,6 @@
 package com.omegar.omegatracker.ui.home
 
+import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import com.omegar.domain.entity.Task
 import com.omegar.domain.entity.api.SpentTime
 import com.omegar.libs.omegalaunchers.createActivityLauncher
 import com.omegar.libs.omegalaunchers.tools.BundlePair
+import com.omegar.libs.omegalaunchers.tools.put
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BaseActivity
@@ -27,12 +29,16 @@ import com.omegar.omegatracker.utils.toTimeFormat
 class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     companion object {
-        private const val AUTHORIZATION_TOKEN = "token"
-        fun newInstance(authToken: BundlePair) = createActivityLauncher(authToken)
+
+        private const val EXTRA_AUTHORIZATION_TOKEN = "token"
+
+        fun createLauncher(authToken: String) = createActivityLauncher(
+            EXTRA_AUTHORIZATION_TOKEN put authToken
+        )
     }
 
     override val presenter: HomePresenter by providePresenter {
-        HomePresenter(intent.extras?.getString(AUTHORIZATION_TOKEN))
+        HomePresenter(this[EXTRA_AUTHORIZATION_TOKEN]!!)
     }
 
     private val singleTaskCard: FrameLayout by bind(R.id.layout_home_item_single_task)
@@ -60,6 +66,11 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     }
     private val taskList: OmegaRecyclerView by bind(R.id.recyclerview_home_tasks, adapter)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setMenu(R.menu.menu_toolbar, R.id.action_logout to presenter::onLogoutClicked)
+    }
+
     override fun setTasks(list: List<Task>) {
         initRecyclerView(list)
         initListeners()
@@ -78,7 +89,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     private fun setStateViewParameters(
         stateTextView: TextView,
-        item: Task
+        item: Task,
     ) {
         stateTextView.text = item.state?.value?.name
         when (item.state?.value?.name) {
@@ -143,7 +154,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
 
     private fun setPriorityViewParameters(
         priorityTextView: TextView,
-        item: Task
+        item: Task,
     ) {
         priorityTextView.text = item.priority?.value?.name
         when (item.priority?.value?.name?.uppercase()) {

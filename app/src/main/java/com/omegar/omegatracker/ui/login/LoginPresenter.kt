@@ -12,20 +12,30 @@ import retrofit2.HttpException
 
 class LoginPresenter : BasePresenter<LoginView>() {
     companion object {
-        private const val BASE_TOKEN = "Bearer perm:"
-        private const val AUTHORIZATION_TOKEN = "token"
+
+        private const val TOKEN_PREFIX = "perm:"
+        private const val TOKEN_BEARER = "Bearer "
     }
 
-    private lateinit var authToken: String
-    private lateinit var response: UserProfile
+    init {
+        tokenStorage.token?.let { token ->
+            HomeActivity.createLauncher(token).launch()
+            viewState.exit()
+        }
+    }
 
     fun requestLogin(token: String) {
         launchWithWaiting {
             try {
-                authToken = BASE_TOKEN + token
-                response = loginRepository.getUserInfo(authToken)
-                response.login?.let { viewState.showToast(Text.from(R.string.label_welcome) + it.toText()) }
-                HomeActivity.newInstance(AUTHORIZATION_TOKEN put authToken).launch()
+                val authToken = if (token.startsWith(TOKEN_PREFIX)) TOKEN_BEARER + token else TOKEN_BEARER + TOKEN_PREFIX + token
+                val response = loginRepository.getUserInfo(authToken)
+
+                tokenStorage.token = authToken
+
+                viewState.showToast(Text.from(R.string.label_welcome) + (response.login ?: ""))
+
+                HomeActivity.createLauncher(authToken).launch()
+                viewState.exit()
             } catch (e: HttpException) {
                 throw TokenException()
             }

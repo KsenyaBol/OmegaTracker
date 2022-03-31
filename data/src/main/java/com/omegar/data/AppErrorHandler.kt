@@ -7,10 +7,10 @@ import retrofit2.HttpException
 
 class AppErrorHandler(private val moshi: Moshi) : ErrorHandler() {
     override fun handleHttpException(httpException: HttpException): AppException {
-        httpException.response()?.errorBody()?.string()?.let { httpErrorBodyAsString ->
-            val apiError = moshi.adapter(ApiErrorBody::class.java).fromJson(httpErrorBodyAsString)
-            return SessionAppException(apiError?.error_description, httpException)
-        }
+//        httpException.response()?.errorBody()?.string()?.let { httpErrorBodyAsString ->
+//            val apiError = moshi.adapter(ApiErrorBody::class.java).fromJson(httpErrorBodyAsString)
+//            return GeneralAppException(apiError?.error_description, httpException)
+//        }
 
         return super.handleHttpException(httpException)
     }
