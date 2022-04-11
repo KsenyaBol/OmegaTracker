@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="activityBackground" format="reference" />
+    <attr name="colorNavigationBar" format="reference" />
+    <attr name="colorIconNavigationBar" format="reference" />
+    <attr name="colorTextButton" format="reference" />
+    <attr name="colorSingleTask" format="reference" />
+    <attr name="colorTask" format="reference" />
 </resources>
