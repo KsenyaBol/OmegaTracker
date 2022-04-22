@@ -1,11 +1,12 @@
-package com.omegar.omegatracker.ui.home
+package com.omegar.omegatracker.ui.task
 
 import com.omegar.domain.entity.Task
 import com.omegar.mvp.viewstate.strategy.StateStrategyType
 import com.omegar.mvp.viewstate.strategy.StrategyType
 import com.omegar.omegatracker.ui.base.BaseView
 
-interface HomeView : BaseView {
+interface TaskListView : BaseView {
+
     @StateStrategyType(StrategyType.ADD_TO_END_SINGLE)
     fun setTasks(list: List<Task>)
 

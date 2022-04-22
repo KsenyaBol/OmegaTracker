@@ -1,18 +1,19 @@
-package com.omegar.omegatracker.ui.home
+package com.omegar.omegatracker.ui.task
 
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
 import com.omegar.omegatracker.ui.base.BasePresenter
 import com.omegar.omegatracker.ui.login.LoginActivity
+import com.omegar.omegatracker.ui.timer.TimerActivity
 
-class HomePresenter(private val authToken: String?) : BasePresenter<HomeView>() {
-
+class TaskListPresenter : BasePresenter<TaskListView>() {
     private val tasks = mutableListOf<Task>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
         launchWithWaiting {
-            val listIssues = authToken?.let { token ->
+            val listIssues = tokenStorage.token?.let { token ->
                 issueRepository.getIssuesForMe(token)
             }
             tasks.clear()
@@ -43,5 +44,9 @@ class HomePresenter(private val authToken: String?) : BasePresenter<HomeView>() 
         tokenStorage.token = null
         LoginActivity.createLauncher().launch()
         viewState.exit()
+    }
+
+    fun onSelectItem(taskName: String) {
+        TimerActivity.createLauncher(taskName).launch()
     }
 }

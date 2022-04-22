@@ -1,13 +1,10 @@
 package com.omegar.omegatracker.ui.login
 
 import com.omega_r.libs.omegatypes.Text
-import com.omega_r.libs.omegatypes.toText
 import com.omegar.data.TokenException
-import com.omegar.domain.entity.UserProfile
-import com.omegar.libs.omegalaunchers.tools.put
 import com.omegar.omegatracker.R
 import com.omegar.omegatracker.ui.base.BasePresenter
-import com.omegar.omegatracker.ui.home.HomeActivity
+import com.omegar.omegatracker.ui.main.MainActivity
 import retrofit2.HttpException
 
 class LoginPresenter : BasePresenter<LoginView>() {
@@ -19,7 +16,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
 
     init {
         tokenStorage.token?.let { token ->
-            HomeActivity.createLauncher(token).launch()
+            MainActivity.createLauncher(token).launch()
             viewState.exit()
         }
     }
@@ -34,7 +31,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
 
                 viewState.showToast(Text.from(R.string.label_welcome) + (response.login ?: ""))
 
-                HomeActivity.createLauncher(authToken).launch()
+                MainActivity.createLauncher(authToken).launch()
                 viewState.exit()
             } catch (e: HttpException) {
                 throw TokenException()

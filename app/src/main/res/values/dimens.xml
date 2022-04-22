@@ -3,4 +3,8 @@
     <dimen name="standard_padding">20dp</dimen>
     <dimen name="title_text_size">20sp</dimen>
     <dimen name="double_padding">40dp</dimen>
+    <dimen name="margin_common">16dp</dimen>
+    <dimen name="common_text_size">16sp</dimen>
+    <dimen name="bottom_margin">24dp</dimen>
+    <dimen name="corner_radius_control">16dp</dimen>
 </resources>

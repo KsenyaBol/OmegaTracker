@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <attr name="activityBackground" format="reference" />
     <attr name="colorNavigationBar" format="reference" />
     <attr name="colorIconNavigationBar" format="reference" />
     <attr name="colorTextButton" format="reference" />
     <attr name="colorSingleTask" format="reference" />
     <attr name="colorTask" format="reference" />
+    <attr name="colorPlayButton" format="reference" />
+    <attr name="colorPlayBackground" format="reference" />
+    <attr name="colorSelector" format="reference" />
+    <attr name="colorNotSelected" format="reference" />
+    <attr name="colorSelected" format="reference" />
+
+    <declare-styleable name="RoundedCircularProgressView">
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color"/>
+        <attr name="backColor" format="color"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="indeterminate" format="boolean"/>
+        <attr name="indeterminateDuration" format="integer"/>
+        <attr name="progress" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="SelectorView">
+        <attr name="titles" format="reference" />
+        <attr name="checkable" format="boolean" />
+    </declare-styleable>
+
 </resources>
