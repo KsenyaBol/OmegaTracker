@@ -1,13 +1,17 @@
-package com.omegar.omegatracker.ui.home
+package com.omegar.omegatracker.ui.task
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.omega_r.bind.adapters.OmegaAutoAdapter
 import com.omega_r.bind.model.binders.bindCustom
 import com.omega_r.bind.model.binders.bindNonNullVisible
@@ -18,30 +22,26 @@ import com.omegar.data.entities.enumcollection.StateEnum
 import com.omegar.data.entities.model.TaskImpl
 import com.omegar.domain.entity.Task
 import com.omegar.domain.entity.api.SpentTime
-import com.omegar.libs.omegalaunchers.createActivityLauncher
-import com.omegar.libs.omegalaunchers.tools.BundlePair
-import com.omegar.libs.omegalaunchers.tools.put
+import com.omegar.libs.omegalaunchers.createFragmentLauncher
 import com.omegar.mvp.ktx.providePresenter
 import com.omegar.omegatracker.R
-import com.omegar.omegatracker.ui.base.BaseActivity
+import com.omegar.omegatracker.ui.base.BaseFragment
 import com.omegar.omegatracker.utils.toTimeFormat
 
-class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
+class TaskListFragment : BaseFragment(R.layout.fragment_task_list), TaskListView {
 
     companion object {
 
-        private const val EXTRA_AUTHORIZATION_TOKEN = "token"
-
-        fun createLauncher(authToken: String) = createActivityLauncher(
-            EXTRA_AUTHORIZATION_TOKEN put authToken
-        )
+        fun createLauncher() = createFragmentLauncher()
     }
 
-    override val presenter: HomePresenter by providePresenter {
-        HomePresenter(this[EXTRA_AUTHORIZATION_TOKEN]!!)
-    }
+    override val presenter: TaskListPresenter by providePresenter()
 
-    private val singleTaskCard: FrameLayout by bind(R.id.layout_home_item_single_task)
+    private val singleTaskCard: FrameLayout by bind(R.id.layout_home_item_single_task) {
+        setOnClickListener {
+            presenter.onSelectItem(singleTaskName.text.toString())
+        }
+    }
     private val singleTaskName: TextView by bind(R.id.text_item_single_task_name)
     private val singleTaskTime: TextView by bind(R.id.text_item_single_task_time)
     private val singleTaskStartBtn: ImageView by bind(R.id.image_item_single_task_arrow)
@@ -66,9 +66,19 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     }
     private val taskList: OmegaRecyclerView by bind(R.id.recyclerview_home_tasks, adapter)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setMenu(R.menu.menu_toolbar, R.id.action_logout to presenter::onLogoutClicked)
+    private val toolbar: Toolbar by bind(R.id.toolbar)
+
+    private val logOutMenuItem: MenuItem by bind<MenuItem> {
+        toolbar.menu.findItem(R.id.action_logout)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        logOutMenuItem.setOnMenuItemClickListener {
+            presenter.onLogoutClicked()
+            true
+        }
     }
 
     override fun setTasks(list: List<Task>) {
@@ -197,8 +207,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home), HomeView {
     }
 
     private fun setTagSettings(view: TextView, textColor: Int, backgroundColor: Int) {
-        view.setTextColor(getColor(textColor))
-        view.setBackgroundColor(getColor(backgroundColor))
+        view.setTextColor(getColor(requireActivity(), textColor))
+        view.setBackgroundColor(getColor(requireActivity(), backgroundColor))
     }
 
     override fun setSingleTaskVisibility(isVisible: Boolean) {

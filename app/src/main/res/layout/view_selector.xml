@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_common"
+    android:layout_marginEnd="@dimen/margin_common"
+    android:background="?colorNotSelected"
+    tools:parentTag="androidx.cardview.widget.CardView">
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorNotSelected"
+        android:orientation="horizontal" />
+
+</merge>

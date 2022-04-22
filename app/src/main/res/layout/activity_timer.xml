@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?activityBackground">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="27dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/text_name_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_semibold"
+                    android:text="@string/app_name"
+                    android:textAlignment="textStart"
+                    android:textColor="?colorTextButton"
+                    android:textSize="24sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="43dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="right"
+                    app:cardBackgroundColor="@color/red_tag"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <TextView
+                        android:id="@+id/textViewk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/label_pause"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/pink"
+                        android:textSize="12sp" />
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="65dp"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/smallProgressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="22dp"
+                    android:layout_height="16dp"
+                    android:layout_weight="1"
+                    android:progressBackgroundTint="#673AB7"
+                    android:progressTint="#673AB7"
+                    android:theme="@style/Theme.OmegaTracker.PurpleAccent" />
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_regular"
+                    android:paddingStart="12dp"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:textColor="?colorTextButton"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Chronometer
+                    android:id="@+id/text_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@string/label_time"
+                    android:textColor="@color/black_dark"
+                    android:textSize="36sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <com.omegar.omegatracker.ui.timer.RoundedCircularProgressView
+                        android:id="@+id/circular_progres"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
+                        android:layout_gravity="center"
+                        app:backColor="@color/purple_light"
+                        app:endColor="@color/purple_tag"
+                        app:startColor="@color/purple_500"
+                        app:strokeWidth="20dp" />
+
+                </FrameLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:orientation="horizontal">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/button_pause"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_background_button"
+                        android:src="@drawable/ic_pause_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_play"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_background_button"
+                        android:src="@drawable/ic_play_button" />
+                </FrameLayout>
+
+                <ImageButton
+                    android:id="@+id/button_done"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_background_button"
+                    android:src="@drawable/ic_stop_button" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/text_pause"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="85dp"
+                        android:layout_weight="1"
+                        android:background="?activityBackground"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center"
+                        android:text="@string/label_pause"
+                        android:textColor="?colorTextButton"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/text_play"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="85dp"
+                        android:layout_weight="1"
+                        android:background="?activityBackground"
+                        android:fontFamily="@font/rubik_medium"
+                        android:gravity="center"
+                        android:text="@string/label_play"
+                        android:textColor="?colorTextButton"
+                        android:textSize="14sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/text_done"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_medium"
+                    android:gravity="center"
+                    android:text="@string/label_done"
+                    android:textColor="?colorTextButton"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

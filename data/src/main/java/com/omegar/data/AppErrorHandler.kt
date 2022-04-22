@@ -6,13 +6,13 @@ import com.squareup.moshi.Moshi
 import retrofit2.HttpException
 
 class AppErrorHandler(private val moshi: Moshi) : ErrorHandler() {
-    override fun handleHttpException(httpException: HttpException): AppException {
+    override fun handleHttpException(httpException: HttpException, method: String?): AppException {
 //        httpException.response()?.errorBody()?.string()?.let { httpErrorBodyAsString ->
 //            val apiError = moshi.adapter(ApiErrorBody::class.java).fromJson(httpErrorBodyAsString)
 //            return GeneralAppException(apiError?.error_description, httpException)
 //        }
 
-        return super.handleHttpException(httpException)
+        return super.handleHttpException(httpException, method)
     }
 }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.omega_r.libs.OmegaCenterIconButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:layout_weight="1"
+    android:background="@drawable/bg_color_selector"
+    android:drawablePadding="7dp"
+    android:fontFamily="@font/rubik_regular"
+    android:foreground="?selectableItemBackground"
+    android:gravity="center"
+    android:minHeight="55dp"
+    android:paddingStart="16dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="4dp"
+    android:textAllCaps="false"
+    android:textColor="?colorTextButton"
+    android:textSize="16sp"
+    tools:layout_width="wrap_content"
+    tools:text="Day" />

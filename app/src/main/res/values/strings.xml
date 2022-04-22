@@ -13,4 +13,24 @@
     <string name="label_name">name</string>
     <string name="label_task">Task</string>
     <string name="label_logout">Logout</string>
+    <string name="label_pause">Pause</string>
+    <string name="label_play">Start</string>
+    <string name="label_time">00:32:10</string>
+    <string name="label_done">Done</string>
+
+    <string name="label_time_duration">Time\nDuration</string>
+    <string name="label_task_completed">Task\nCompleted!</string>
+    <string name="label_day">Day</string>
+    <string name="label_week">Week</string>
+    <array name="titles_appointments">
+        <item>@string/label_day</item>
+        <item>@string/label_week</item>
+    </array>
+
+    <string name="message_coming_soon">Coming soon!</string>
+
+    <string name="action_task_list">Task list</string>
+    <string name="action_new_task">New task</string>
+    <string name="action_report">Report</string>
+
 </resources>

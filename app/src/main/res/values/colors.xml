@@ -25,4 +25,11 @@
     <color name="gray_lighter">#4F4F4F</color>
     <color name="purple_tag">#F5EEFC</color>
     <color name="transparent">#0000</color>
+    <color name="red_tag">#FFEFF1</color>
+    <color name="gray_button">#828282</color>
+    <color name="grey_lighter">#4F4F4F</color>
+    <color name="grey_light">#BDBDBD</color>
+
+    <color name="light_blue">#3E4DFF</color>
+    <color name="light_blue_disabled">#9088EE</color>
 </resources>

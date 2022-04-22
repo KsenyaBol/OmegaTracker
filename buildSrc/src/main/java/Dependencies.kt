@@ -65,11 +65,11 @@ object Versions {
     const val room = "2.4.0-alpha03"
 
     //Omega
-    const val omegaBase = "1.4.1"
-    const val omegaMoxy = "2.2.0"
+    const val omegaBase = "74c94d8124"
+    const val omegaMoxy = "62e5a9f"
     const val omegaTypes = "2.0.3"
     const val omegaGlide = "2.0.0"
-    const val omegaBind = "1.0.2"
+    const val omegaBind = "12f9ff63"
     const val omegaLaunchers = "1.0.3"
     const val omegaExtensions = "1.0.5"
     const val omegaIntentCore = "1.2.0"
