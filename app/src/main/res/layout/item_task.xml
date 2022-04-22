@@ -15,7 +15,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?colorTask">
 
             <ImageView
                 android:id="@+id/image_item_task_ava"
@@ -61,7 +62,7 @@
                 android:id="@+id/button_item_task_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/transparent"
                 app:layout_constraintBottom_toBottomOf="@+id/linearlayout"
                 app:layout_constraintEnd_toEndOf="@+id/text_item_task_time"
                 app:layout_constraintStart_toEndOf="@+id/linearlayout"
