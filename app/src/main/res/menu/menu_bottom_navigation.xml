@@ -2,12 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:icon="@drawable/ic_time"
-        android:title="" />
+        android:id="@+id/action_task_list"
+        android:icon="@drawable/time"
+        android:title="Task list" />
     <item
+        android:id="@+id/action_new_task"
         android:icon="@drawable/ic_add"
-        android:title="" />
+        android:title="New task" />
     <item
-        android:icon="@drawable/ic_pie_chart"
-        android:title="" />
+        android:id="@+id/action_report"
+        android:icon="@drawable/pie_chart"
+        android:title="Report" />
 </menu>
