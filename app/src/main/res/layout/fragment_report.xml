@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?activityBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_common"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_task_report"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_common"
+                    android:layout_marginTop="@dimen/margin_common"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:gravity="center_vertical"
+                    android:lineHeight="18dp"
+                    android:text="@string/label_task_completed"
+                    android:textColor="?colorTextButton"
+                    android:textSize="@dimen/common_text_size"
+                    app:drawableLeftCompat="@drawable/ic_task_complited" />
+
+                <TextView
+                    android:id="@+id/textview_task_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_common"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="@dimen/bottom_margin"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="12"
+                    android:textColor="?colorTextButton"
+                    android:textSize="32sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_common"
+                android:layout_weight="1"
+                android:background="@drawable/bg_task_report"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_common"
+                    android:layout_marginTop="@dimen/margin_common"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/label_time_duration"
+                    android:textColor="?colorTextButton"
+                    android:textSize="@dimen/common_text_size"
+                    app:drawableLeftCompat="@drawable/ic_stop_watch" />
+
+                <TextView
+                    android:id="@+id/textview_time_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_common"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="1h 46m"
+                    android:textColor="?colorTextButton"
+                    android:textSize="32dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.omegar.omegatracker.ui.report.SelectorView
+            android:id="@+id/selector_view"
+            style="@style/SelectorViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_common"
+            android:layout_marginEnd="@dimen/margin_common"
+            app:titles="@array/titles_appointments" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="80dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_task_report"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
