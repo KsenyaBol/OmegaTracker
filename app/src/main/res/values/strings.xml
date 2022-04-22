@@ -30,7 +30,7 @@
     <string name="message_coming_soon">Coming soon!</string>
 
     <string name="action_task_list">Task list</string>
-    <string name="action_new_issues">New issues</string>
+    <string name="action_new_task">New task</string>
     <string name="action_report">Report</string>
 
 </resources>
